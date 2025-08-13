@@ -1,5 +1,9 @@
+import os
+import sys
 import unittest
 from datetime import date
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from app import create_app, db
 from app.models import User, Reservation, is_available
