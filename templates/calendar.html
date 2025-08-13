@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Calendar{% endblock %}
+{% block content %}
+<div id='calendar'></div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    events: '/api/reservations',
+    eventDidMount: function(info) {
+      const email = info.event.extendedProps.email;
+      const title = info.event.title + " (" + email + ")";
+      info.el.setAttribute('title', title);
+    },
+    eventClick: function(info) {
+      alert(info.event.title + "\n" + info.event.extendedProps.email);
+    }
+  });
+  calendar.render();
+});
+</script>
+{% endblock %}
