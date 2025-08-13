@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Portal{% endblock %}
+{% block content %}
+<h2>Welcome, {{ current_user.username }}</h2>
+<h3>Upcoming Reservations</h3>
+<ul>
+  {% for r in upcoming %}
+  <li>{{ r.start_date }} to {{ r.end_date }} - <a href="{{ url_for('main.edit_reservation', res_id=r.id) }}">Edit</a></li>
+  {% else %}
+  <li>No upcoming reservations.</li>
+  {% endfor %}
+</ul>
+<h3>Past Reservations</h3>
+<ul>
+  {% for r in past %}
+  <li>{{ r.start_date }} to {{ r.end_date }}</li>
+  {% else %}
+  <li>No past reservations.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
